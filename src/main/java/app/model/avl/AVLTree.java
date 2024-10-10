@@ -1,5 +1,7 @@
 package app.model.avl;
 
+import java.util.HashMap;
+
 public class AVLTree {
 
 	private AVLNode root;
@@ -93,13 +95,13 @@ public class AVLTree {
         return height(node.getLeft()) - height(node.getRight());
     }
 
-    public AVLNode search(String country) {
+    public HashMap<Integer,Long>search(String country) {
         return search(country, root);
     }
 
-    private AVLNode search(String country, AVLNode main) {
+    private HashMap<Integer,Long> search(String country, AVLNode main) {
         if (main == null || main.getCountry().equals(country)) {
-            return main;  
+            return main.getData();  
         }
 
         if (country.compareTo(main.getCountry()) < 0) {
@@ -107,6 +109,10 @@ public class AVLTree {
         } else {
             return search(country, main.getRight());
         }
+    }
+    
+    public int height () {
+    	return root.getHeight();
     }
 
     public void print() {

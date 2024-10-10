@@ -1,5 +1,7 @@
 package app.model.binary;
 
+import java.util.HashMap;
+
 public class BinaryTree {
 
     private BinaryNode root;
@@ -42,6 +44,40 @@ public class BinaryTree {
 
     public void print() {
         print(root);
+    }
+    
+    public HashMap<Integer, Long> search(String country) {
+        return search(country, root);
+    }
+
+    private HashMap<Integer, Long>search(String country, BinaryNode root) {
+        if (root == null) {
+            return null;
+        }
+
+        if (root.getCountry().equals(country)) {
+            return root.getData();
+        }
+
+        if (country.compareTo(root.getCountry()) < 0) {
+            return search(country, root.getLeft());
+        } else {
+            return search(country, root.getRight());
+        }
+    }
+    
+    public int height () {
+    	return height (root);
+    }
+    private int height(BinaryNode main) {
+        if (main == null) {
+            return 0;
+        }
+
+        int alturaEsquerda = height(main.getLeft());
+        int alturaDireita = height(main.getRight());
+
+        return Math.max(alturaEsquerda, alturaDireita) + 1;
     }
 
     private void print(BinaryNode main) {
